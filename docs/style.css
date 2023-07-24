@@ -1,4 +1,41 @@
-.e1_4 { 
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100;400&family=Open+Sans&display=swap');
+ .card {
+	width  :400 px;
+	background-color: #F5F5F5;
+	border-radius: 15px;
+	padding: 40px;
+	text-align: center;
+	color:#1c1515; 
+	font-weight: bold;
+ }
+ .card img{
+	width: auto;
+	max-width: 300px;
+	height: auto;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	margin: auto;
+	/* position: relative;
+	left: 40%; */
+ }
+ label{
+	display: block;
+	width:200px;
+	background: #80BA77;
+	padding: 10px;
+	margin: 10px auto;
+	border-radius: 10px;
+	box-shadow: 4px 6px 8px #00000040;
+	cursor:pointer;
+ }
+ input{
+	display: none;
+ }
+ #myButton {
+	display: none;
+	}
+ 
+/* .e1_4 { 
 	overflow:hidden;
 }
 .e1_4 { 
@@ -127,4 +164,4 @@
 	text-align:center;
 	font-size:40px;
 	letter-spacing:-0.4000000059604645;
-}
+} */
