@@ -27,12 +27,20 @@
 
   <div class = "card">
     <h1>Image Classification</h1>
-    <img src="ui_images/vector.png" id="imagePreview" alt = "No Image Uploaded">
+    <div class = "box">
+      <img src="ui_images/vector.png" id="imagePreview" alt = "No Image Uploaded">
+    </div>
     <label for="input-file">Upload Image</label>
     <input type="file" accept="image/*" id ="input-file">
     <!-- <p id="test"> test</p> -->
     <label for="myButton">Classify</label>
     <button id="myButton">Classify></button>
+
+
+    <div class="output">
+      <p id="result">Result output</p>
+      <div class="loader"></div>
+    </div>
   </div>
   
 

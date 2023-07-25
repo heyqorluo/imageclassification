@@ -5,10 +5,13 @@ const url = 'https://upx3yb0685.execute-api.eu-west-2.amazonaws.com/api/classify
 // Add a click event listener to the button
 document.getElementById("myButton").addEventListener("click", function() {
   // alert("Button Clicked!!");
-  console.log("hello world");
+  console.log("Classifying image...");
   // sendingtext();
   // sendingimage();
   uploadImage();
+  document.getElementById("result").innerHTML = "";
+  document.getElementsByClassName("loader")[0].style.display = "block";
+  
 });
 
 var imBytes;
@@ -17,9 +20,11 @@ var fileInput = document.getElementById("input-file");
 
 fileInput.onchange = function(){
   imageInput.src = URL.createObjectURL(fileInput.files[0]);
+  document.getElementById("result").innerHTML = "Result output";
 };
 
 let file;
+let result;
 
 imageInput.onload = function(){
   file = fileInput.files[0];
@@ -52,7 +57,10 @@ async function uploadImage() {
       body: JSON.stringify(payload),
   })
   .then(function(res){ return res.json(); })
-  .then(function(data){ alert( JSON.stringify( data ) ); });
+  // .then(function(data){ alert( JSON.stringify( data ) );
+  // result = data;})
+  .then(function(data){result = data;});
+  ReportResult();
 };
 
 
@@ -67,4 +75,12 @@ function toBase64(file) {
       };
       reader.onerror = (error) => reject(error);
   });
+}
+
+function ReportResult(){
+  let list = result["Result:"]["prediction_result"];
+  let ResultfromList = Object.entries(list)[0];
+  console.log(ResultfromList);
+  document.getElementsByClassName("loader")[0].style.display = "none";
+  document.getElementById("result").innerHTML += "Result output"+"<br>"+"<br>" + ResultfromList + "%";
 }
