@@ -25,7 +25,7 @@ var fileInput = document.getElementById("input-file");
 
 fileInput.onchange = function(){
   imageInput.src = URL.createObjectURL(fileInput.files[0]);
-  document.getElementById("result").innerHTML = "Result output";
+  document.getElementById("result").innerHTML = "Result will be shown here.";
 };
 
 
@@ -83,8 +83,10 @@ function toBase64(file) {
 function ReportResult(){
   list = result["Result:"]["prediction_result"];
   let ResultfromList = Object.entries(list)[0];
+  let regex = /[^a-zA-Z0-9]/g;
+  ResultfromList[0] = ResultfromList[0].replace(regex, "");
   document.getElementsByClassName("loader")[0].style.display = "none";
-  document.getElementById("result").innerHTML += "Result output"+"<br>"+"<br>" + ResultfromList + "%";
+  document.getElementById("result").innerHTML += "This picture has " + ResultfromList[1] + "% chance of being a " + ResultfromList[0] + ".";
   cleanData();
   PlotBarChart();
 }
@@ -103,7 +105,7 @@ function cleanData(){
 function PlotBarChart(){
 var xValues = [];
 var yValues = [];
-var barColors = ["#ce606040", "#80BA77","blue","orange","brown"];
+var barColors = ["#ECD0D0", "#80BA77","blue","orange","brown"];
 
 for (var i in listarray){
   xValues.push(listarray[i][0]);
