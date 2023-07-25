@@ -2,16 +2,21 @@
 // const url ="http://127.0.0.1:8000/classify_image2";
 const url = 'https://upx3yb0685.execute-api.eu-west-2.amazonaws.com/api/classify_image2/'
 
+let file;
+let result;
+let list;
+let listarray = [];
+
 // Add a click event listener to the button
 document.getElementById("myButton").addEventListener("click", function() {
   // alert("Button Clicked!!");
   console.log("Classifying image...");
   // sendingtext();
   // sendingimage();
+  listarray = [];
   uploadImage();
   document.getElementById("result").innerHTML = "";
   document.getElementsByClassName("loader")[0].style.display = "block";
-  
 });
 
 var imBytes;
@@ -23,8 +28,6 @@ fileInput.onchange = function(){
   document.getElementById("result").innerHTML = "Result output";
 };
 
-let file;
-let result;
 
 imageInput.onload = function(){
   file = fileInput.files[0];
@@ -78,9 +81,63 @@ function toBase64(file) {
 }
 
 function ReportResult(){
-  let list = result["Result:"]["prediction_result"];
+  list = result["Result:"]["prediction_result"];
   let ResultfromList = Object.entries(list)[0];
-  console.log(ResultfromList);
   document.getElementsByClassName("loader")[0].style.display = "none";
   document.getElementById("result").innerHTML += "Result output"+"<br>"+"<br>" + ResultfromList + "%";
+  cleanData();
+  PlotBarChart();
+}
+function cleanData(){
+  let regex = /[^a-zA-Z0-9]/g;
+  let Arraylist = Object.entries(list);
+  Arraylist.forEach(function(item){
+    item[0] = item[0].replace(regex, "");
+  });
+  for (var i in Arraylist){
+    listarray.push([Arraylist[i][0], Arraylist[i][1]]);
+  }
+  console.log(listarray);
+}
+
+function PlotBarChart(){
+var xValues = [];
+var yValues = [];
+var barColors = ["#ce606040", "#80BA77","blue","orange","brown"];
+
+for (var i in listarray){
+  xValues.push(listarray[i][0]);
+  yValues.push(listarray[i][1]);
+}
+console.log(xValues);
+console.log(yValues);
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Classification Result",
+      fontSize: 16,
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          min: 0,
+          max: 100,
+          stepSize: 10,
+        }
+      }]
+    }
+  }
+});
 }

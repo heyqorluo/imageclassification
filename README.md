@@ -7,3 +7,4 @@ create a machine learning model for image classification
     .venv\Scripts\activate
     For Mac:
     source .venv/bin/activate
+## Chart is created by Chart.js
