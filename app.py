@@ -33,7 +33,7 @@ def classify_img2():
     
     #using modal
     modal_function = modal.Function.lookup("example-get-started","predict")
-    result = modal_function.call(image_array)
+    result = modal_function.remote(image_array)
 
 
     return Response(body={'Result:': result},
@@ -68,7 +68,7 @@ def classify_img():
     
     #using modal
     modal_function = modal.Function.lookup("example-get-started","predict")
-    result = modal_function.call(image_array)
+    result = modal_function.remote(image_array)
 
 
     return Response(body={'Result:': result},
@@ -83,7 +83,8 @@ def sending_text():
     print("request:", request.raw_body)
     return request.raw_body
 
-#locally working
+#locally working 
+#run chalice local and then curl http://127.0.0.1:8000/send_image
 @app.route('/send_image', methods=['GET'], content_types=['application/json'])
 def serve_img():
     # with open('test.png', 'rb') as img:
@@ -99,7 +100,7 @@ def serve_img():
     
     #using modal
     modal_function = modal.Function.lookup("example-get-started","predict")
-    result = modal_function.call(image_array)
+    result = modal_function.remote(image_array)
 
 
     return Response(body={'Result:': result},
