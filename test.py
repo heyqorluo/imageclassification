@@ -1,18 +1,18 @@
 import modal
-from modal import Stub, web_endpoint
+from modal import App, web_endpoint
 from typing import Dict
 
 
-stub = modal.Stub("example-get-started")
+App = modal.App("example-get-started")
 image = modal.Image.debian_slim().pip_install("tensorflow").copy_local_file("./output/model.h5","model.h5")
 
-@stub.function()
+@App.function()
 @web_endpoint()
 def square(x):
     x=int(x)
     return {"square": x**2}
 
-@stub.function(image=image,mounts=[modal.Mount.from_local_file("model.h5", "model.h5")])
+@App.function(image=image,mounts=[modal.Mount.from_local_file("model.h5", "model.h5")])
 def predict(image_array):
     # import tensorflow as tf
     from tensorflow.keras import models
