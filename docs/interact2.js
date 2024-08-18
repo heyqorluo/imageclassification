@@ -1,6 +1,7 @@
 // const url = 'http://127.0.0.1:8000/text_test'
 // const url ="http://127.0.0.1:8000/classify_image2";
-const url = 'https://upx3yb0685.execute-api.eu-west-2.amazonaws.com/api/classify_image2/'
+// const url = 'https://upx3yb0685.execute-api.eu-west-2.amazonaws.com/api/classify_image2/'
+const url = 'https://24664vwhl1.execute-api.eu-west-2.amazonaws.com/api/classify_image2/'
 
 let file;
 let result;

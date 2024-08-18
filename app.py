@@ -50,7 +50,7 @@ def classify_img():
     # im_b64 = request.json_body['image']
     
     # Convert the JSON string to a dictionary.
-    data = json.loads(app.current_request.json_body)
+    data = app.current_request.json_body
     # print("\nDATA:\n", data, "\n")
 
     #Access the 'image' key from the JSON data.

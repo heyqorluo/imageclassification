@@ -24,7 +24,8 @@ def predict(image_array):
     CLASS_NAMES = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
     
     # Load the model
-    model = models.load_model("/model.h5")
+    model = models.load_model("/model.h5", compile=False)
+    model.save("/model.h5")
     predictions = model.predict(image_array)
     import numpy as np
     predicted_class = np.argmax(predictions)
